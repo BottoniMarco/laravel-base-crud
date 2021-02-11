@@ -48,7 +48,8 @@ class BeerController extends Controller
      */
     public function show($id)
     {
-        //
+        $beers = Beer::find($id); 
+        dd($beers);
     }
 
     /**

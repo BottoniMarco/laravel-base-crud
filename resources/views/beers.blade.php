@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <title>Document</title>
-</head>
-<body>
-<main class="container">
+@extends('layouts.main')
 
-    <h1>birra</h1>
+@section('content')
     <table class="table table-dark table-striped table-bordered">
         <thead >
-            <tr>ID</tr>
-            <tr>Brand</tr>
-            <tr>Name</tr>
-            <tr>ABV</tr>
-            <tr>Description</tr>
+            <th>ID</th>
+            <th>Brand</th>
+            <th>Name</th>
+            <th>ABV</th>
+            <th>Description</th>
         </thead>
         <tbody  >
             @foreach ($beers as $beer)
@@ -28,6 +19,9 @@
                     <td>{{ $beer->description }}</td>
                     <td>{{ $beer->created_at }}</td>
                     <td>{{ $beer->updated_at }}</td>
+                    <td>
+                        <a href="{{ route('beers.show' , $beer->id) }}" class="btn btn-outline-light">mostra</a>
+                    </td>
 
                 </tr>
             @endforeach
@@ -35,8 +29,9 @@
 
     
     </table>
-</main>
-</body>
-</html>
 
+@endsection
 
+@section('header')
+    <h1>birra</h1>
+@endsection
