@@ -35,3 +35,9 @@
 @section('header')
     <h1>birra</h1>
 @endsection
+
+@section('footer')
+    <div class="text-right">
+        <a href="{{ route('beers.create') }}" class="btn btn-lg btn-primary">AGGIUNGI BIRRA</a>
+    </div>
+@endsection 
