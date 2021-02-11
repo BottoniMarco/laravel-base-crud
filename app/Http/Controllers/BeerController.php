@@ -46,10 +46,10 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Beer $beers)
     {
-        $beers = Beer::find($id); 
-        dd($beers);
+        // $beers = Beer::find($id);
+        return view('beers',compact('beers'));
     }
 
     /**
