@@ -20,8 +20,14 @@
                     <td>{{ $beer->created_at }}</td>
                     <td>{{ $beer->updated_at }}</td>
                     <td>
-                        <a href="{{ route('beers.show' , $beer->id) }}" class="btn btn-outline-light">mostra</a>
+                        <a href="{{ route('beers.show' , $beer->id) }}" class="btn btn-outline-light"><i class="fas fa-search-plus"></i>
+                        </a>
                     </td>
+                    <td>
+                        <a href="{{ route('beers.edit' , $beer->id) }}" class="btn btn-outline-light"><i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+
 
                 </tr>
             @endforeach
