@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <table class="table table-dark table-striped table-bordered">
         <thead >
             <th>ID</th>
@@ -27,6 +32,15 @@
                         <a href="{{ route('beers.edit' , $beer->id) }}" class="btn btn-outline-light"><i class="fas fa-pencil-alt"></i>
                         </a>
                     </td>
+                    <td>
+                        <form action="{{ route('beers.destroy' , $beer->id) }}" method="POST">    
+                            @csrf
+                            @method('DELETE')                        
+                            <button  class="btn btn-outline-light"><i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+
 
 
                 </tr>

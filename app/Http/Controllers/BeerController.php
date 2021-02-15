@@ -7,6 +7,14 @@ use App\Beer;
 
 class BeerController extends Controller
 {
+    private $bookValidation = [
+        'id' => 'required|numeric',
+        'brand' => 'required|max:50',
+        'name' => 'required|max:50',
+        'ABV' => 'required|numeric',
+        'description' => 'required|max:500'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -38,15 +46,7 @@ class BeerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $request->validate(
-            [
-                'id' => 'required|numeric',
-                'brand' => 'required|max:50',
-                'name' => 'required|max:50',
-                'ABV' => 'required|numeric',
-                'description' => 'required|max:500'
-            ]
-        );
+        $request->validate($this->bookValidation);
 
         $beer = new Beer();
         // $beer->$id = $data["id"];
@@ -58,7 +58,8 @@ class BeerController extends Controller
         $result = $beer->save();
 
         $newBeer = Beer::orderBy('id', 'DESC')->first();
-        return redirect()->route('beers.show', $newBeer);
+        // return redirect()->route('beers.show', $newBeer);
+        return redirect()->route('beers.index')->with('message',"Birra '".$beer->name."' creata correttamente");
 
     }
 
@@ -80,9 +81,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        return view('edit');
+        return view('edit', compact('beer'));
     }
 
     /**
@@ -92,9 +93,13 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beer $beer)
     {
-        //
+        $data = $request -> all();
+        $request->validate($this->bookValidation);
+        $beer->update($data);
+
+        return redirect()->route('beers.index')->with('message',"Birra '".$beer->name."' aggiornata correttamente");
     }
 
     /**
@@ -103,8 +108,10 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Beer $beer)
+    {   
+        $title = $beer->name;
+        $beer -> delete();
+        return redirect()->route('beers.index')->with('message',"Birra '".$title."' eliminata correttamente");
     }
 }

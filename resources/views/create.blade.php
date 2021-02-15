@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="brand"></label>
-                <input type="text" class="form-control" id="brand" name="brand" placeholder="brand" value="{{ old('brabd') }}">
+                <input type="text" class="form-control" id="brand" name="brand" placeholder="brand" value="{{ old('brand') }}">
             </div>
             <div class="form-group">
                 <label for="name"></label>
